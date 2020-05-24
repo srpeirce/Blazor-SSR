@@ -1,6 +1,6 @@
 @page "/fetchdata"
 @using Blender.Web.Shared
-@inject HttpClient Http
+@inject WeatherForecastService WeatherForecastService
 
 <h1>Weather forecast</h1>
 
@@ -40,7 +40,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
-    }
+        var (success, weatherForecasts) = await WeatherForecastService.Get();
+        forecasts = weatherForecasts;
+;    }
 
 }
