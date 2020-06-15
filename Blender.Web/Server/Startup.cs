@@ -27,6 +27,7 @@ namespace Blender.Web.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddHttpClient<WeatherForecastService>(options => options.BaseAddress = new Uri("https://localhost:5001/"));
+            services.AddScoped<HeadViewModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,19 @@
+@using Microsoft.JSInterop
+@inject IJSRuntime JsRuntime;
+@inject HeadViewModel HeadViewModel
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    protected override void OnInitialized()
+    {
+        HeadViewModel.Title = Title;
+        HeadViewModel.RaiseHeadViewModelChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRuntime.InvokeVoidAsync("jsInteropHead.setTitle", HeadViewModel.Title);
+    }
+}
